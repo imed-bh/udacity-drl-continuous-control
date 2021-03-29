@@ -4,6 +4,10 @@ import matplotlib.pyplot as plt
 
 
 class Metrics:
+    """
+    This class is used to keep track of the running average of score for the last 100 episodes
+    and plot it in real-time to a matplotlib figure.
+    """
     def __init__(self):
         self.step_count = 0
         self.episode_count = 0

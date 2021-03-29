@@ -38,7 +38,5 @@ if __name__ == '__main__':
         fc2_units=FC2_UNITS,
     ))
     agent.train(N_STEPS, UPDATE_EVERY, PRINT_EVERY, EPS_INIT, EPS_DECAY, EPS_MIN)
-    print(agent.metrics.xdata)
-    print(agent.metrics.ydata)
     input('Press key to continue...')
     env.close()

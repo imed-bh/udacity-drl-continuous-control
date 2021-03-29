@@ -5,6 +5,10 @@ from src.reacher_env import ReacherEnv
 
 
 class Agent(ABC):
+    """
+    This class is the base for the different agents. Currently there is only random agent and DDPG agent
+    but the idea is to be able to extend and compare other types of agents.
+    """
     def __init__(self, env: ReacherEnv):
         self.env = env
         self.t_step = 0

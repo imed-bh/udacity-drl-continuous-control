@@ -5,15 +5,18 @@ import torch.nn.functional as F
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 
+INIT_WEIGHTS = 1e-6
+
+
 class Actor(nn.Module):
     def __init__(self, state_size, action_size, fc1_units, fc2_units):
         super().__init__()
         self.fc1 = nn.Linear(state_size, fc1_units).to(device)
         self.fc2 = nn.Linear(fc1_units, fc2_units).to(device)
         self.fc3 = nn.Linear(fc2_units, action_size).to(device)
-        self.fc1.weight.data.uniform_(-1e-6, 1e-6)
-        self.fc2.weight.data.uniform_(-1e-6, 1e-6)
-        self.fc3.weight.data.uniform_(-1e-6, 1e-6)
+        self.fc1.weight.data.uniform_(-INIT_WEIGHTS, INIT_WEIGHTS)
+        self.fc2.weight.data.uniform_(-INIT_WEIGHTS, INIT_WEIGHTS)
+        self.fc3.weight.data.uniform_(-INIT_WEIGHTS, INIT_WEIGHTS)
 
     def forward(self, state):
         x = F.relu(self.fc1(state))
@@ -39,9 +42,9 @@ class Critic(nn.Module):
         self.fc1 = nn.Linear(state_size+action_size, fc1_units).to(device)
         self.fc2 = nn.Linear(fc1_units, fc2_units).to(device)
         self.fc3 = nn.Linear(fc2_units, 1).to(device)
-        self.fc1.weight.data.uniform_(-1e-6, 1e-6)
-        self.fc2.weight.data.uniform_(-1e-6, 1e-6)
-        self.fc3.weight.data.uniform_(-1e-6, 1e-6)
+        self.fc1.weight.data.uniform_(-INIT_WEIGHTS, INIT_WEIGHTS)
+        self.fc2.weight.data.uniform_(-INIT_WEIGHTS, INIT_WEIGHTS)
+        self.fc3.weight.data.uniform_(-INIT_WEIGHTS, INIT_WEIGHTS)
 
     def forward(self, state, action):
         x = torch.cat((state, action), dim=1)
